@@ -4,3 +4,9 @@ tópicos para mexer:
 
 -força de senha
 -backup
+
+Como funciona a força de senha:
+
+Fraca: menos de 2 critérios atendidos.
+Média: 2 a 3 critérios.
+Forte: atende aos 4 critérios (mín. 8 caracteres, número, letra maiúscula, símbolo).
