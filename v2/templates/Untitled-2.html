@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Validador de Força de Senha</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .strength {
+      margin-top: 10px;
+      font-weight: bold;
+      height: 25px;
+    }
+
+    .weak {
+      color: red;
+    }
+
+    .medium {
+      color: orange;
+    }
+
+    .strong {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <label for="senha">Digite sua senha:</label>
+    <input type="password" id="senha" placeholder="Senha" oninput="verificarForcaSenha()" />
+    <div id="forcaSenha" class="strength"></div>
+  </div>
+
+  <script>
+    function verificarForcaSenha() {
+      const senha = document.getElementById('senha').value;
+      const forcaSenha = document.getElementById('forcaSenha');
+
+      let forca = 0;
+
+      if (senha.length >= 8) forca++;
+      if (/[A-Z]/.test(senha)) forca++;
+      if (/[0-9]/.test(senha)) forca++;
+      if (/[\W_]/.test(senha)) forca++;
+
+      if (senha.length === 0) {
+        forcaSenha.textContent = '';
+        forcaSenha.className = 'strength';
+      } else if (forca <= 1) {
+        forcaSenha.textContent = 'Senha fraca';
+        forcaSenha.className = 'strength weak';
+      } else if (forca === 2 || forca === 3) {
+        forcaSenha.textContent = 'Senha média';
+        forcaSenha.className = 'strength medium';
+      } else {
+        forcaSenha.textContent = 'Senha forte';
+        forcaSenha.className = 'strength strong';
+      }
+    }
+  </script>
+</body>
+</html>

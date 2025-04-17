@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Verificador de Força de Senha</title>
+  <style>
+    #forca {
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>Verificador de Força de Senha</h2>
+  <input type="password" id="senha" placeholder="Digite sua senha" oninput="verificarForca()">
+  <p>Força da senha: <span id="forca">-</span></p>
+
+  <script>
+    function verificarForca() {
+      const senha = document.getElementById("senha").value;
+      const forcaEl = document.getElementById("forca");
+
+      let forca = 0;
+
+      // Critérios de força
+      if (senha.length >= 8) forca++;
+      if (/[A-Z]/.test(senha)) forca++;
+      if (/[a-z]/.test(senha)) forca++;
+      if (/[0-9]/.test(senha)) forca++;
+      if (/[^A-Za-z0-9]/.test(senha)) forca++; // caracteres especiais
+
+      // Exibir resultado
+      let resultado = "";
+      let cor = "";
+
+      switch (forca) {
+        case 0:
+        case 1:
+          resultado = "Fraca";
+          cor = "red";
+          break;
+        case 2:
+        case 3:
+          resultado = "Média";
+          cor = "orange";
+          break;
+        case 4:
+        case 5:
+          resultado = "Forte";
+          cor = "green";
+          break;
+      }
+
+      forcaEl.textContent = resultado;
+      forcaEl.style.color = cor;
+    }
+  </script>
+
+</body>
+</html>
